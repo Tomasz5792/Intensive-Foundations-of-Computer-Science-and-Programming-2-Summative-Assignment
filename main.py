@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import ttk
 import customtkinter as ctk
 import csv
+import re
+from CTkMessagebox import CTkMessagebox  
+
 
 
 # variables
@@ -11,9 +14,20 @@ colour_Green        = "#00AF41"
 colour_GreenTint1   = "#49B066"
 colour_GreenTint2   = "#72BD8A"
 colour_GreenTint3   = "#9FCEAE"
+colour_Blue        = "#0078AF"
+colour_BlueTint1   = "#399AC3"
+colour_BlueTint2   = "#6DB6D2"
+colour_BlueTint3   = "#A3D1E3"
+colour_Grey        = "#494949"
+colour_GreyTint1   = "#6D6D6D"
+colour_GreyTint2   = "#939393"
+colour_GreyTint3   = "#B9B9B9"
 
+
+# define a non-functional accessibility requirement, such as maintaining a minimum 4.5:1 colour contrast ratio
 colour_main = colour_Green
 colour_menu = colour_GreenTint3
+colour_button = colour_Blue
 
 # text
 text_size = 10
@@ -23,39 +37,9 @@ text_title_font = ("Segoe UI", 20)
 text__font = ("Segoe UI", 16)
 text_title_padding = 10
 
-def setup_styles():
-    
-    style = ttk.Style()
-    style.theme_use("default")
-
-    # table body style
-    style.configure("Treeview",
-        background="#2a2d2e",
-        foreground="white",
-        rowheight=25,
-        fieldbackground="#343638",
-        bordercolor="#343638",
-        borderwidth=0,
-        font=text__font,
-        )
-
-    # selected row
-    style.map("Treeview",
-    background=[('selected', '#22559b')])
-
-    # header style
-    style.configure("Treeview.Heading",
-        background="#565b5e",
-        foreground="white",
-        relief="flat",
-        font=text_title_font,
-        )
-
-    style.map("Treeview.Heading",
-    background=[('active', '#3484F0')])
 
 
-class App_Window(ctk.CTk):
+class  AppWindow(ctk.CTk):
     #main window class
     def __init__(self) -> None:
         """
@@ -76,7 +60,7 @@ class App_Window(ctk.CTk):
         self.minsize(900, 450)
 
         # components
-        self.header = Frame(self, side = "top", colour_background = colour_main, height = 45)
+        self.header =  AppContainer(self, side = "top", colour_background = colour_main, height = 45)
         
         self.header_label = ctk.CTkLabel(self.header, 
                                         text="Add item to table app",
@@ -85,15 +69,72 @@ class App_Window(ctk.CTk):
                                         )
         self.header_label.pack(side="left", padx=text_title_padding)
 
-        self.body = Frame(self, side = "bottom")
+        self.body =  AppContainer(self, side = "bottom")
 
-        self.table_container = Frame(self.body, side = "left", padding_verticle = 5, padding_horizontal = 5)
-        self.table = Table(self.table_container)
+        self.table_container =  AppContainer(self.body, side = "left", padding_verticle = 5, padding_horizontal = 5)
+        self.table =  AppTable(self.table_container)
 
-        self.menu = Frame(self.body, side = "right", colour_background = colour_menu, width = 300, corner_radius = 5, padding_verticle = 5, padding_horizontal = (0,5))
+        self.menu =  AppContainer(self.body, side = "right", colour_background = colour_menu, width = 300, corner_radius = 5, padding_verticle = 5, padding_horizontal = (0,5))
+        self.text_input_FirstName = InputName(self.menu, placeholder_text="First Name")
+        self.text_input_MiddleName = InputName(self.menu, placeholder_text="Middle Name")
+        self.text_input_LastName = InputName(self.menu, placeholder_text="Last Name")
+        self.text_input_TelephoneNo = InputTelephoneNo(self.menu, placeholder_text="Telephone No")
+        
+        self.add_item_button =  AppButton(self.menu, text="Clear Inputs", command=self.clear_input)
+        self.add_item_button =  AppButton(self.menu, text="Add New Item", command=self.on_add_item)
+
+    def on_add_item(self):
+        # Retrieve input values
+        first_name = self.text_input_FirstName.get_value()
+        middle_name = self.text_input_MiddleName.get_value()
+        last_name = self.text_input_LastName.get_value()
+        telephone_no = self.text_input_TelephoneNo.get_value()
+
+        # Validate input values
+        bool_TelephoneNo_Validation = self.text_input_TelephoneNo.validate_telephone_no(telephone_no)
+
+        if first_name == "" or middle_name == "" or last_name == "" or telephone_no == "":
+            self.show_messagebox(
+                title="Please fill in all fields",
+                message="All fields are required. Please complete all input fields before submitting.",
+                icon="info"
+            )
+        
+        if bool_TelephoneNo_Validation or bool_TelephoneNo_Validation:  # add other validations here
+            self.show_messagebox(
+                title="title",
+                message="message",
+                icon="warning"
+            )
+        
+        # Add logic to insert the new item into the table or data source
+
+    def clear_input(self):
+        self.text_input_FirstName.clear_input()
+        self.text_input_MiddleName.clear_input()
+        self.text_input_LastName.clear_input()
+        self.text_input_TelephoneNo.clear_input()
+
+    def show_messagebox(self, title: str, message: str, icon: str = "info"):
+        """
+        Displays a message box with the specified title, message, and icon.
+
+        Args:
+            title (str): The title of the message box.
+            message (str): The message to display in the message box.
+            icon (str, optional): The icon type for the message box. Defaults to "info".
+
+        Returns:
+            None
+        """
+        CTkMessagebox(
+            title=title,
+            message=message,
+            icon=icon
+        ).show()
 
 
-class Frame(ctk.CTkFrame):
+class  AppContainer(ctk.CTkFrame):
     def __init__(
             self, 
             parent, 
@@ -129,35 +170,64 @@ class Frame(ctk.CTkFrame):
         expand = True
 
         # fixed size
+        # if width is not None or height is not None:
+        #     expand = False
+        #     self.pack_propagate(False)
+        #     if width is not None:
+        #         fill = "y"
+        #         self.configure(width=width)
+        #     if height is not None:
+        #         fill = "x"
+        #         self.configure(height=height)
+        
         if width is not None or height is not None:
             expand = False
             self.pack_propagate(False)
+
             if width is not None:
-                fill = "y"
                 self.configure(width=width)
+                fill = "y"
             if height is not None:
-                fill = "x"
                 self.configure(height=height)
+                fill = "x"
+        else:
+            fill = "both"
+            expand = True
+
 
         self.pack(side=side, expand = expand, fill = fill, padx=padding_horizontal, pady=padding_verticle)
 
 
-class Table(ctk.CTkFrame):
+class  AppTable(ctk.CTkFrame):
     def __init__(
             self, 
             parent,
             ) -> None:
-        super().__init__(parent)
+        super().__init__(parent, 
+                         #fg_color="transparent", corner_radius=10, border_width=0 ## trying to make the border dissapear
+                         )
+        
+        style = ttk.Style(self)
 
-
+        style.layout(
+            "NoBorder.Treeview",
+            [("Treeview.treearea", {"sticky": "nswe"})]
+        )
+        style.configure("NoBorder.Treeview.Heading", font=("Segoe UI", 14), borderwidth=0, relief="flat")
+        style.configure("NoBorder.Treeview", font=("Segoe UI", 13), rowheight=28)
 
         self.pack(fill="both", expand=True)
-        self.tree = ttk.Treeview(self, columns=(), show="headings", style="Custom.Treeview")
+        self.tree = ttk.Treeview(self, columns=(), show="headings", 
+                                 style="NoBorder.Treeview"
+                                 )
 
         # Scrollbars
         self.verticle_Scroll = ttk.Scrollbar(self, orient="vertical", command=self.tree.yview)
         self.horizontal_Scroll = ttk.Scrollbar(self, orient="horizontal", command=self.tree.xview)
-        self.tree.configure(yscrollcommand=self.verticle_Scroll.set, xscrollcommand=self.horizontal_Scroll.set)
+        self.tree.configure(
+            yscrollcommand=self.verticle_Scroll.set, 
+            xscrollcommand=self.horizontal_Scroll.set
+            )
 
         # Layout
         self.grid_rowconfigure(0, weight=1)
@@ -191,8 +261,183 @@ class Table(ctk.CTkFrame):
             self.tree.insert("", "end", values=row)
     
 
+class AppButton(ctk.CTkButton):
+    """
+    A reusable customtkinter button with consistent styling.
+        
+    Args:
+        parent (CTk or CTkFrame): The parent widget this will be placed inside.
+        text ( str ): The text to display on the button.
+        command ( function, optional ): The function to call when the button is clicked. Defaults to None.
+        
+    Methods:
+        None
+
+    Returns:
+            None
+    """
+    def __init__(
+            self, 
+            parent,
+            text: str,
+            command = None,
+            ) -> None:
+        """
+        Initializes the AppButton with consistent styling.
+        
+        Args:
+            parent (CTk or CTkFrame): The parent widget this will be placed inside.
+            text ( str ): The text to display on the button.
+            command ( function, optional ): The function to call when the button is clicked. Defaults to None.
+        """
+        super().__init__(
+            parent, 
+            text=text, 
+            command=command,
+            font=text__font,
+            fg_color=colour_button,
+            hover_color=colour_BlueTint1,
+            text_color=text_title_colour,
+            corner_radius=5,
+            #fg_color_disabled=colour_GreyTint1, #doesn't apear to be a real input
+            )
+        
+        side = "top"
+        fill = "x"
+        expand = False
+        padding_verticle = (5,5)
+        padding_horizontal = (5,5)
+        
+        self.pack(side=side, expand = expand, fill = fill, padx=padding_horizontal, pady=padding_verticle)
+
+
+class InputText(ctk.CTkEntry):
+    """
+    A reusable customtkinter text input with consistent styling.
+        
+    Args:
+        parent (CTk or CTkFrame): The parent widget this will be placed inside.
+        placeholder_text ( str ): The text to display in this input.
+        
+    Methods:
+        def get_value(self) -> str:  retrieves the current text value from the input field.
+        def clear_input(self):  clears the text in the input field.
+        
+    Returns:
+            None
+    """
+    def __init__(
+            self, 
+            parent,
+            placeholder_text: str = "",
+            ) -> None:
+        super().__init__(
+            parent,
+            placeholder_text=placeholder_text,
+            font=text__font,
+            corner_radius=5,
+            border_width=1,
+            border_color=colour_GreyTint2,
+            )
+        
+        side = "top"
+        fill = "x"
+        expand = False
+        padding_verticle = (5,5)
+        padding_horizontal = (5,5)
+        
+        self.pack(side=side, expand = expand, fill = fill, padx=padding_horizontal, pady=padding_verticle)
+
+    def get_value(self) -> str:
+        """
+        Retrieves the current text value from the input field.
+
+        Returns:
+            str: The current text value in the input field.
+        """
+        print(self._name,": ", self.get())
+        return self.get()
+    
+    def clear_input(self):
+        self.delete(0, "end")
+    
+
+class InputName(InputText):
+    """
+    A reusable customtkinter name input with consistent styling.
+        
+    Args:
+        parent (CTk or CTkFrame): The parent widget this will be placed inside.
+        placeholder_text ( str ): The text to display in this input.
+        
+    Methods:
+        None
+
+    Returns:
+            None
+    """
+    def __init__(
+            self, 
+            parent,
+            placeholder_text: str = "",
+            ) -> None:
+        super().__init__(
+            parent,
+            placeholder_text=placeholder_text,
+            )
+        
+
+class InputTelephoneNo(InputText):
+    """
+    A reusable customtkinter telephone number input with consistent styling.
+        
+    Args:
+        parent (CTk or CTkFrame): The parent widget this will be placed inside.
+        placeholder_text ( str ): The text to display in this input.
+        
+    Methods:
+        None
+
+    Returns:
+            None
+    """
+    def __init__(
+            self, 
+            parent,
+            placeholder_text: str = "",
+            ) -> None:
+        super().__init__(
+            parent,
+            placeholder_text=placeholder_text,
+            )
+
+    def validate_telephone_no(self, telephone_no: str) -> bool:
+        """
+        Validates the telephone number format.
+
+        Args:
+            telephone_no (str): The telephone number to validate.
+
+        Returns:
+            bool: True if the telephone number is valid, False otherwise.
+        """
+        cleaned = telephone_no.replace(" ", "")
+
+        mobile_pattern = r"^07\d{9}$"  # UK mobile format eg 07123456789
+        landline_pattern = r"^0(1|2)\d{8,9}$"  # UK landline format eg 01234567890 or 02012345678
+        intl_pattern = r"^\+447\d{9}$"  # UK international format eg +447912345678
+
+        passed_Validation = bool(
+            re.match(mobile_pattern, cleaned) or 
+            re.match(landline_pattern, cleaned) or 
+            re.match(intl_pattern, cleaned)
+        )
+
+        print(self._name,": ", passed_Validation)
+
+        return passed_Validation
+
 if __name__ == "__main__":
-    app = App_Window()
-    setup_styles()
+    app =  AppWindow()
     app.mainloop()
     

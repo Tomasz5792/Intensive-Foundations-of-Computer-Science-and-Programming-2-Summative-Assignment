@@ -44,8 +44,16 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 - The application shall display a label with the text "Enter a new item".
 - The application shall provide an input field for the user to enter information for 3 rows.
 - The application shall provide a "Submit" button. When clicked, the button shall trigger the action to save the item to a table.
-- The application shall allow deleting of items.
 - The appliation shall have appropriate data input such as dropdowns or text input.
+
+#### Future Functional Requirements
+- Incluse a day night mode
+- The application shall allow deleting of items.
+- Show and hide add item bar.
+
+#### Future Accessibility Requirements
+- Font and text resizing
+- Colour changes for specific types of colourblind or 
 
 ### Non-Functional Requirements
 
@@ -56,6 +64,15 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 - The application shall run on any system that supports Python and Tkinter.
 - The application shall use appropriate font sizes and color contrasts for readability.
 - The application design shall allow for easy addition of new features.
+
+#### Accessibility Requirements
+
+- All text and interactive elements shall maintain a minimum 4.5:1 colour contrast ratio against their background, in accordance with WCAG 2.1 AA standards.
+- All screens shall maintain consistent navigation and layout.
+
+
+
+
 
 ## Tech Stack Outline
 
