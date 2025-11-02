@@ -4,14 +4,14 @@ Welcome to the Add item to table app Application repository! This Tkinter-based 
 
 # Introduction
 
-<span style="color:red">Provide a concise overview of your workplace environment and explain the relevance of your proposed MVP to your employer. (500 words +/- 10%)</span>
+*Provide a concise overview of your workplace environment and explain the relevance of your proposed MVP to your employer. (500 words +/- 10%)*
 
 
 # Design
 
 ## GUI Design
 
-<span style="color:red">GUI Design: create a GUI design using Figma or another prototyping tool.  Include screenshots and optionally provide a link to your Figma design. The design should be specific to your application.</span>
+*GUI Design: create a GUI design using Figma or another prototyping tool.  Include screenshots and optionally provide a link to your Figma design. The design should be specific to your application.*
 
 
 ### Screen mockups
@@ -46,13 +46,13 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 
 ## Tech Stack Outline
 
-<span style="color:red">describe the technologies you will use</span>
+*describe the technologies you will use*
 
 
 ## Code Design Document
 
-<span style="color:red">Code Design Document: provide a class diagram or similar documentation to
-illustrate your code design.</span>
+*Code Design Document: provide a class diagram or similar documentation to
+illustrate your code design.*
 
 The code design is summarised in the class diagram below.
 
@@ -65,9 +65,9 @@ The `Frame` and `Table` class inherits from the `ctk.CTkFrame` class, which prov
 
 # Testing Strategy
 
-<span style="color:red">Write a coherent strategy for testing your application. Explain what types of testing
+*Write a coherent strategy for testing your application. Explain what types of testing
 you will use to test your MVP. Note that the second summative assignment requires
-writing some unit tests using a Python framework. (500 words +/- 10%)</span>
+writing some unit tests using a Python framework. (500 words +/- 10%)*
 
 
 ### References
