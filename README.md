@@ -2,8 +2,7 @@
 
 Welcome to the Add item to table app Application repository! This Tkinter-based GUI application allows users to enter a row into a table.
 
-## 📚 Table of Contents
-- [Add item to table app Application Documentation](#add-item-to-table-app-application-documentation)
+## Table of Contents
 - [Introduction](#introduction)
 - [Design](#design)
   - [GUI Design](#gui-design)
