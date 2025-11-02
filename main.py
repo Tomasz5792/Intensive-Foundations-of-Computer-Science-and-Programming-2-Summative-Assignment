@@ -100,7 +100,7 @@ class  AppWindow(ctk.CTk):
                 icon="info"
             )
         
-        if bool_TelephoneNo_Validation or bool_TelephoneNo_Validation:  # add other validations here
+        if not bool_TelephoneNo_Validation or not bool_TelephoneNo_Validation:  # add other validations here
             self.show_messagebox(
                 title="title",
                 message="message",
@@ -179,7 +179,7 @@ class  AppContainer(ctk.CTkFrame):
         #     if height is not None:
         #         fill = "x"
         #         self.configure(height=height)
-        
+
         if width is not None or height is not None:
             expand = False
             self.pack_propagate(False)
