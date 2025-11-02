@@ -24,10 +24,6 @@ text__font = ("Segoe UI", 16)
 text_title_padding = 10
 
 def setup_styles():
-    # custom tkinter style
-    #style = ttk.Style()
-    #style.configure("Custom.Treeview", font=text__font, rowheight=26)
-    #style.configure("Custom.Treeview.Heading", font=text__font)
     
     style = ttk.Style()
     style.theme_use("default")

@@ -1,8 +1,27 @@
-# Add item to table app Application
+# Add item to table app Application Documentation
 
 Welcome to the Add item to table app Application repository! This Tkinter-based GUI application allows users to enter a row into a table.
 
-## The Design
+# Introduction
+
+<span style="color:red">Provide a concise overview of your workplace environment and explain the relevance of your proposed MVP to your employer. (500 words +/- 10%)</span>
+
+
+# Design
+
+## GUI Design
+
+<span style="color:red">GUI Design: create a GUI design using Figma or another prototyping tool.  Include screenshots and optionally provide a link to your Figma design. The design should be specific to your application.</span>
+
+
+### Screen mockups
+
+The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf0LBXGbHx/Apps?node-id=4001-2960&p=f&t=P8jyBnSRsRnxKFNO-0).
+
+![mockups](Formative_Figma_Diagram.png)
+
+
+## Requirements Document
 
 ### Functional Requirements
 
@@ -25,13 +44,15 @@ Welcome to the Add item to table app Application repository! This Tkinter-based 
 - The application shall use appropriate font sizes and color contrasts for readability.
 - The application design shall allow for easy addition of new features.
 
-### Screen mockups
+## Tech Stack Outline
 
-The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf0LBXGbHx/Apps?node-id=4001-2960&p=f&t=P8jyBnSRsRnxKFNO-0).
+<span style="color:red">describe the technologies you will use</span>
 
-![mockups](Formative_Figma_Diagram.png)
 
-### Code Design
+## Code Design Document
+
+<span style="color:red">Code Design Document: provide a class diagram or similar documentation to
+illustrate your code design.</span>
 
 The code design is summarised in the class diagram below.
 
@@ -40,6 +61,14 @@ The `App_Window` class inherits from the `ctk.CTk` class, which provides the fou
 The `Frame` and `Table` class inherits from the `ctk.CTkFrame` class, which provides foundational responsive component functionality. This inheritance allows `Frame` and `Table` to be placed inside themselves in order to create a reponsive app. `Frame` is extended with flaxible layout and colour option and `Table` is extended with an interactive tkinter table.
 
 ![class-diagram](Formative_inheritance_diagram.png)
+
+
+# Testing Strategy
+
+<span style="color:red">Write a coherent strategy for testing your application. Explain what types of testing
+you will use to test your MVP. Note that the second summative assignment requires
+writing some unit tests using a Python framework. (500 words +/- 10%)</span>
+
 
 ### References
 [customtkinter documentation](https://customtkinter.tomschimansky.com/documentation/appearancemode)  
