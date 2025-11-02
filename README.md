@@ -2,6 +2,20 @@
 
 Welcome to the Add item to table app Application repository! This Tkinter-based GUI application allows users to enter a row into a table.
 
+## 📚 Table of Contents
+- [Add item to table app Application Documentation](#add-item-to-table-app-application-documentation)
+- [Introduction](#introduction)
+- [Design](#design)
+  - [GUI Design](#gui-design)
+    - [Screen mockups](#screen-mockups)
+  - [Requirements Document](#requirements-document)
+    - [Functional Requirements](#functional-requirements)
+    - [Non-Functional Requirements](#non-functional-requirements)
+  - [Tech Stack Outline](#tech-stack-outline)
+  - [Code Design Document](#code-design-document)
+- [Testing Strategy](#testing-strategy)
+- [References](#references)
+
 # Introduction
 
 *Provide a concise overview of your workplace environment and explain the relevance of your proposed MVP to your employer. (500 words +/- 10%)*
