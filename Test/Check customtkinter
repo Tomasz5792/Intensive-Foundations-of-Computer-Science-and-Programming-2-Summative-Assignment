@@ -1,0 +1,21 @@
+import customtkinter as ctk
+
+# Set the appearance and theme
+ctk.set_appearance_mode("dark")  # "light" or "dark"
+ctk.set_default_color_theme("blue")  # also "green" or "dark-blue"
+
+# Create the main window
+app = ctk.CTk()
+app.title("CustomTkinter Test")
+app.geometry("300x200")
+
+# Add a label
+label = ctk.CTkLabel(app, text="CustomTkinter is working!", font=("Arial", 14))
+label.pack(pady=20)
+
+# Add a button
+button = ctk.CTkButton(app, text="Click me", command=lambda: label.configure(text="Button clicked!"))
+button.pack(pady=10)
+
+# Run the app
+app.mainloop()
