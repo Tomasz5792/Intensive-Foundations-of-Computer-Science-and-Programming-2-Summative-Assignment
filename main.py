@@ -84,6 +84,13 @@ class  AppWindow(ctk.CTk):
         self.add_item_button =  AppButton(self.menu, text="Add New Item", command=self.on_add_item)
 
     def on_add_item(self):
+        """
+        Handles the logic for adding a new item to the table when the "Add New Item" button is clicked.
+        Args:
+            None
+        Returns:
+            None
+        """
         # Retrieve input values
         first_name = self.text_input_FirstName.get_value()
         middle_name = self.text_input_MiddleName.get_value()
@@ -91,7 +98,7 @@ class  AppWindow(ctk.CTk):
         telephone_no = self.text_input_TelephoneNo.get_value()
 
         # Validate input values
-        bool_TelephoneNo_Validation = self.text_input_TelephoneNo.validate_telephone_no(telephone_no)
+        bool_TelephoneNo_Validation, str_TelephoneNo_Error = self.text_input_TelephoneNo.validate_telephone_no(telephone_no)
 
         if first_name == "" or middle_name == "" or last_name == "" or telephone_no == "":
             self.show_messagebox(
@@ -100,10 +107,10 @@ class  AppWindow(ctk.CTk):
                 icon="info"
             )
         
-        if not bool_TelephoneNo_Validation or not bool_TelephoneNo_Validation:  # add other validations here
+        if not bool_TelephoneNo_Validation #or not bool_TelephoneNo_Validation:  # add other validations here
             self.show_messagebox(
                 title="title",
-                message="message",
+                message=str_TelephoneNo_Error,
                 icon="warning"
             )
         
@@ -411,7 +418,7 @@ class InputTelephoneNo(InputText):
             placeholder_text=placeholder_text,
             )
 
-    def validate_telephone_no(self, telephone_no: str) -> bool:
+    def validate_telephone_no(self, telephone_no: str) -> tuple[bool, str]:
         """
         Validates the telephone number format.
 
@@ -419,10 +426,26 @@ class InputTelephoneNo(InputText):
             telephone_no (str): The telephone number to validate.
 
         Returns:
-            bool: True if the telephone number is valid, False otherwise.
+            tuple[bool, str]: True if the telephone number is valid, False otherwise.  Also returns an error message.
         """
-        cleaned = telephone_no.replace(" ", "")
+        Error_Message = "Error"
+        cleaned = telephone_no.replace(" ", "").strip()
 
+        if not cleaned:
+            Error_Message = "Telephone number can not be empty."
+            print(self._name,": ", False, "Message: ", Error_Message)
+            return False, Error_Message
+
+        if re.search(r"[^0-9+]", cleaned):
+            Error_Message = "Telephone number must contain only numbers no letters or symbols."
+            print(self._name, ": ", False, "Message:", Error_Message)
+            return False, Error_Message
+
+        if "+" in cleaned[1:]:
+            Error_Message = "The '+' sign can only appear at the beginning of the number."
+            print(self._name, ": ", False, "Message:", Error_Message)
+            return False, Error_Message
+ 
         mobile_pattern = r"^07\d{9}$"  # UK mobile format eg 07123456789
         landline_pattern = r"^0(1|2)\d{8,9}$"  # UK landline format eg 01234567890 or 02012345678
         intl_pattern = r"^\+447\d{9}$"  # UK international format eg +447912345678
@@ -432,10 +455,14 @@ class InputTelephoneNo(InputText):
             re.match(landline_pattern, cleaned) or 
             re.match(intl_pattern, cleaned)
         )
+        if passed_Validation:
+            Error_Message = "Telephone number is valid."
+        else:
+            Error_Message = "Invalid telephone number format. Please enter a valid UK telephone number. Examples: 07123456789, 01234567890, +447912345678."
 
-        print(self._name,": ", passed_Validation)
+        print(self._name,": ", passed_Validation, "Message: ", Error_Message)
 
-        return passed_Validation
+        return passed_Validation, Error_Message
 
 if __name__ == "__main__":
     app =  AppWindow()
