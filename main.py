@@ -5,6 +5,7 @@ import csv
 import re
 from CTkMessagebox import CTkMessagebox
 import tkinter.messagebox as messagebox
+from datetime import datetime
 
 
 
@@ -19,7 +20,7 @@ colour_Blue        = "#0078AF"
 colour_BlueTint1   = "#399AC3"
 colour_BlueTint2   = "#6DB6D2"
 colour_BlueTint3   = "#A3D1E3"
-colour_Grey        = "#494949"
+colour_Grey        = "#383838"
 colour_GreyTint1   = "#6D6D6D"
 colour_GreyTint2   = "#939393"
 colour_GreyTint3   = "#B9B9B9"
@@ -32,12 +33,25 @@ colour_button = colour_Blue
 
 # text
 text_size = 10
-text_colour =  "#000000"
+text_colour =  colour_Grey
 text_title_colour = "#FFFFFF"
 text_title_font = ("Segoe UI", 20)
 text__font = ("Segoe UI", 16)
 text_title_padding = 10
 
+directorates = [
+    "",
+    "Agri Food Chain Directorate",
+    "Environment Quality Directorate",
+    "Animal and Plant Health Directorate",
+    "Digital Data and Technology Services Directorate",
+    "Water and Flood Management Directorate",
+    "Science Capability in Animal Health Directorate",
+    "Analysis Directorate",
+    "Transformation Directorate",
+    "Environment and Rural Group",
+    "Food and Farming Group"
+]
 
 
 class  AppWindow(ctk.CTk):
@@ -58,7 +72,7 @@ class  AppWindow(ctk.CTk):
         # settings
         self.title("Add item to table app")
         self.geometry("1200x600")
-        self.minsize(900, 450)
+        self.minsize(900, 500)
 
         # components
         self.header =  AppContainer(self, side = "top", colour_background = colour_main, height = 45)
@@ -72,15 +86,26 @@ class  AppWindow(ctk.CTk):
 
         self.body =  AppContainer(self, side = "bottom")
 
+        self.menu =  AppContainer(self.body, side = "right", colour_background = colour_menu, width = 300, corner_radius = 5, padding_verticle = 5, padding_horizontal = (0,5))
+        
         self.table_container =  AppContainer(self.body, side = "left", padding_verticle = 5, padding_horizontal = 5)
         self.table =  AppTable(self.table_container)
 
-        self.menu =  AppContainer(self.body, side = "right", colour_background = colour_menu, width = 300, corner_radius = 5, padding_verticle = 5, padding_horizontal = (0,5))
-        self.text_input_FirstName = InputName(self.menu, placeholder_text="First Name")
-        self.text_input_MiddleName = InputName(self.menu, placeholder_text="Middle Name")
-        self.text_input_LastName = InputName(self.menu, placeholder_text="Last Name")
-        self.text_input_TelephoneNo = InputTelephoneNo(self.menu, placeholder_text="Telephone No")
+        self.Label_FirstName = AppLabel(self.menu, text="First Name:")
+        self.text_input_FirstName = InputName(self.menu, placeholder_text="eg. John")
+
+        self.Label_MiddleName = AppLabel(self.menu, text="Middle Name:")
+        self.text_input_MiddleName = InputName(self.menu, placeholder_text="eg. Michael")
+
+        self.Label_LastName = AppLabel(self.menu, text="Last Name:")
+        self.text_input_LastName = InputName(self.menu, placeholder_text="eg. Smith")
+
+        self.Label_TelephoneNo = AppLabel(self.menu, text="Telephone No:")
+        self.text_input_TelephoneNo = InputTelephoneNo(self.menu, placeholder_text="eg. 07123456789 or 01234567890")
         
+        self.Label_Directorate = AppLabel(self.menu, text="Directorate:")
+        self.dropdown_Directorate = InputDropdown(self.menu, options=directorates)
+
         self.add_item_button =  AppButton(self.menu, text="Clear Inputs", command=self.clear_input)
         self.add_item_button =  AppButton(self.menu, text="Add New Item", command=self.on_add_item)
 
@@ -97,31 +122,93 @@ class  AppWindow(ctk.CTk):
         middle_name = self.text_input_MiddleName.get_value()
         last_name = self.text_input_LastName.get_value()
         telephone_no = self.text_input_TelephoneNo.get_value()
+        directorate = self.dropdown_Directorate.get_value()
 
         # Validate input values
+        bool_FirstName_Validation, str_FirstName_Error = self.text_input_FirstName.validate_name(first_name, "First name")
+        bool_MiddleName_Validation, str_MiddleName_Error = self.text_input_MiddleName.validate_name(middle_name, "Middle name")
+        bool_LastName_Validation, str_LastName_Error = self.text_input_LastName.validate_name(last_name, "Last name")
         bool_TelephoneNo_Validation, str_TelephoneNo_Error = self.text_input_TelephoneNo.validate_telephone_no(telephone_no)
 
-        if first_name == "" or middle_name == "" or last_name == "" or telephone_no == "":
+        if first_name == "" or middle_name == "" or last_name == "" or telephone_no == "" or directorate == "":
             self.show_messagebox(
                 title="Please fill in all fields",
                 message="All fields are required. Please complete all input fields before submitting.",
                 icon="info"
             )
-        
-        if not bool_TelephoneNo_Validation: #or not bool_TelephoneNo_Validation:  # add other validations here
+
+        elif not bool_FirstName_Validation:
             self.show_messagebox(
-                title="title",
-                message=str_TelephoneNo_Error,
+                title="First Name Validation Error",
+                message=str_FirstName_Error,
+                icon="warning"
+            )
+
+        elif not bool_MiddleName_Validation:
+            self.show_messagebox(
+                title="Middle Name Validation Error",
+                message=str_MiddleName_Error,
+                icon="warning"
+            )
+
+        elif not bool_LastName_Validation:
+            self.show_messagebox(
+                title="Last Name Validation Error",
+                message=str_LastName_Error,
                 icon="warning"
             )
         
-        # Add logic to insert the new item into the table or data source
+        elif not bool_TelephoneNo_Validation:
+            self.show_messagebox(
+                title="Telephone Number Validation",
+                message=str_TelephoneNo_Error,
+                icon="warning"
+            )
+
+        else:
+            self.show_messagebox(
+                title="Item Added Successfully",
+                message=f"New item added:\nFirst Name: {first_name}\nMiddle Name: {middle_name}\nLast Name: {last_name}\nTelephone No: {telephone_no}\nDirectorate: {directorate}",
+                icon="info"
+            )
+           
+            self.append_to_csv(first_name, middle_name, last_name, telephone_no, directorate)  #append to csv file
+            self.table.load_csv_file()  #reload table data
+            self.clear_input()  #clear inputs
+
+    def append_to_csv(self, first_name, middle_name, last_name, telephone_no, directorate):
+        """
+        Appends a new record to the table_data.csv file.
+
+        Args:
+            first_name (str): First name
+            middle_name (str): Middle name
+            last_name (str): Last name
+            telephone_no (str): Telephone number
+            directorate (str): Directorate
+
+        Returns:
+            None
+        """
+
+        file_path = "table_data.csv"
+        time_and_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        try:
+            with open(file_path, "a", newline='', encoding="utf-8") as f:
+                writer = csv.writer(f)
+                writer.writerow([first_name, middle_name, last_name, telephone_no, directorate, time_and_date])
+            print(f"Record added: {first_name}, {middle_name}, {last_name}, {telephone_no}, {directorate}, {time_and_date}")
+        except Exception as e:
+            self.show_messagebox("Error", f"Failed to write to CSV: {e}", icon="error")
 
     def clear_input(self):
         self.text_input_FirstName.clear_input()
         self.text_input_MiddleName.clear_input()
         self.text_input_LastName.clear_input()
         self.text_input_TelephoneNo.clear_input()
+        self.dropdown_Directorate.clear_input()
+        self.table.load_csv_file()  #reload table data
 
     def show_messagebox(self, title: str, message: str, icon: str = "info"):
         """
@@ -260,20 +347,32 @@ class  AppTable(ctk.CTkFrame):
             rows = list(reader)
 
         columns = rows[0]
+        columns = [c for c in columns if c != "Date Time Added"]
         data = rows[1:]
 
         self.tree["columns"] = columns
+        
+        width_table = self.tree.winfo_width()
+        print("Table width: ", width_table)
+        if width_table <= 1:
+            width_table = 1300  # default width if not yet rendered
+        column_width = width_table // len(columns)
 
         for column in columns:
             self.tree.heading(column, text=column)
-            self.tree.column(column, anchor="center", stretch=True)
+            self.tree.column(column, anchor="center", stretch=False, width=column_width) #trying to get the horizontal scroll bar used
 
         # clear existing
         for row in self.tree.get_children():
             self.tree.delete(row)
 
         for row in data:
-            self.tree.insert("", "end", values=row)
+            altered_row = [
+                value
+                for i, value in enumerate(row)
+                if i < len(columns) and columns[i] != "Date Time Added"
+            ]
+            self.tree.insert("", "end", values=altered_row)
     
 
 class AppButton(ctk.CTkButton):
@@ -320,7 +419,45 @@ class AppButton(ctk.CTkButton):
         side = "top"
         fill = "x"
         expand = False
-        padding_verticle = (5,5)
+        padding_verticle = (10,0)
+        padding_horizontal = (5,5)
+        
+        self.pack(side=side, expand = expand, fill = fill, padx=padding_horizontal, pady=padding_verticle)
+
+
+class AppLabel(ctk.CTkLabel):
+    """
+    A reusable customtkinter label with consistent styling.
+        
+    Args:
+        parent (CTk or CTkFrame): The parent widget this will be placed inside.
+        text ( str ): The text to display on the label.
+        
+    Methods:
+        None
+
+    Returns:
+            None
+    """
+    def __init__(
+            self, 
+            parent,
+            text: str,
+            ) -> None:
+        super().__init__(
+            parent,
+            text=text,
+            font=text__font,
+            text_color=text_colour,
+            #justify="left",
+            anchor="w",
+            #bg_color="red"  #for testing aligment
+            )
+        
+        side = "top"
+        fill = "x"
+        expand = False
+        padding_verticle = (5,0)
         padding_horizontal = (5,5)
         
         self.pack(side=side, expand = expand, fill = fill, padx=padding_horizontal, pady=padding_verticle)
@@ -358,7 +495,7 @@ class InputText(ctk.CTkEntry):
         side = "top"
         fill = "x"
         expand = False
-        padding_verticle = (5,5)
+        padding_verticle = (5,0)
         padding_horizontal = (5,5)
         
         self.pack(side=side, expand = expand, fill = fill, padx=padding_horizontal, pady=padding_verticle)
@@ -386,7 +523,7 @@ class InputName(InputText):
         placeholder_text ( str ): The text to display in this input.
         
     Methods:
-        None
+        validate_name(self, name: str, TextInput_Name: str) -> tuple[bool, str]:  Validates the name format.
 
     Returns:
             None
@@ -395,11 +532,67 @@ class InputName(InputText):
             self, 
             parent,
             placeholder_text: str = "",
+            #TextInput_Name: str = "Error",
             ) -> None:
         super().__init__(
             parent,
             placeholder_text=placeholder_text,
             )
+    
+    def validate_name(self, name: str, TextInput_Name: str) -> tuple[bool, str]:
+        """
+        Validates the name format.
+
+        Args:
+            placeholder_text (str): The string to validate.
+            TextInput_Name (str): The name of the text input field.
+
+        Returns:
+            tuple[bool, str]: True if the name is valid, False otherwise.  Also returns an error message.
+
+        Validation logic:
+            Must not be empty.
+            Must contain only letters (a-z, A-Z), spaces, hyphens (-), or apostrophes (').
+            Must not contain multiple spaces or hyphens in a row.
+            Each part of the name (separated by spaces, hyphens, or apostrophes) must start with a capital letter.
+        """
+        Error_Message = "None"
+        cleaned = name.strip()
+
+        if cleaned == "":
+            Error_Message = TextInput_Name + " can not be empty."
+            print(self._name,": ", False, "Message: ", Error_Message)
+            return False, Error_Message
+
+        if re.search(r"[^a-zA-Z '-]", name):
+            Error_Message = TextInput_Name + " must contain only letters, spaces, hyphens, or apostrophes."
+            print(self._name, ": ", False, "Message:", Error_Message)
+            return False, Error_Message
+        
+        if re.search(r"[ -]{2,}| -|- ", name):  # checks for multiple spaces or hyphens in a row
+            Error_Message = TextInput_Name + " cannot contain multiple spaces or hyphens in a row."
+            print(self._name, ":", False, "Message:", Error_Message)
+            return False, Error_Message
+        
+        def check_if_capitalised(word: str) -> bool:
+            for part in word.split(" "):
+                for subpart in part.split("-"):
+                    for subpart2 in subpart.split("'"):
+                        if not subpart2 or subpart2 != subpart2.capitalize():
+                            return False
+            return True
+        
+        if not check_if_capitalised(name):
+            Error_Message = TextInput_Name + " must be capitalised (e.g., John, O'Connor, Anne-Marie)."
+            print(self._name, ":", False, "Message:", Error_Message)
+            return False, Error_Message
+
+        passed_Validation = True
+        Error_Message = TextInput_Name + " is valid."
+
+        print(self._name,": ", passed_Validation, "Message: ", Error_Message)
+
+        return passed_Validation, Error_Message
         
 
 class InputTelephoneNo(InputText):
@@ -411,7 +604,7 @@ class InputTelephoneNo(InputText):
         placeholder_text ( str ): The text to display in this input.
         
     Methods:
-        None
+        validate_telephone_no(self, telephone_no: str) -> tuple[bool, str]:  Validates the telephone number format.
 
     Returns:
             None
@@ -435,21 +628,30 @@ class InputTelephoneNo(InputText):
 
         Returns:
             tuple[bool, str]: True if the telephone number is valid, False otherwise.  Also returns an error message.
+
+        Validation logic:
+            Must not be empty.
+            Must contain only numbers (0-9) and an optional leading '+' for international format.
+            The '+' sign can only appear at the beginning of the number.
+            Must match one of the following UK telephone number formats:
+                - UK mobile format: 07XXXXXXXXX (11 digits starting with '07')
+                - UK landline format: 0XYYYYYYYYY or 0XXYYYYYYYY (10 or 11 digits starting with '01' or '02')
+                - UK international format: +447XXXXXXXXX (13 digits starting with '+447')
         """
         Error_Message = "Error"
-        cleaned = telephone_no.replace(" ", "").strip()
+        cleaned = telephone_no.replace(" ", "")
 
-        if not cleaned:
+        if cleaned == "":
             Error_Message = "Telephone number can not be empty."
             print(self._name,": ", False, "Message: ", Error_Message)
             return False, Error_Message
 
-        if re.search(r"[^0-9+]", cleaned):
+        if re.search(r"[^0-9+]", telephone_no):
             Error_Message = "Telephone number must contain only numbers no letters or symbols."
             print(self._name, ": ", False, "Message:", Error_Message)
             return False, Error_Message
 
-        if "+" in cleaned[1:]:
+        if "+" in telephone_no[1:]:
             Error_Message = "The '+' sign can only appear at the beginning of the number."
             print(self._name, ": ", False, "Message:", Error_Message)
             return False, Error_Message
@@ -459,9 +661,9 @@ class InputTelephoneNo(InputText):
         intl_pattern = r"^\+447\d{9}$"  # UK international format eg +447912345678
 
         passed_Validation = bool(
-            re.match(mobile_pattern, cleaned) or 
-            re.match(landline_pattern, cleaned) or 
-            re.match(intl_pattern, cleaned)
+            re.match(mobile_pattern, telephone_no) or 
+            re.match(landline_pattern, telephone_no) or 
+            re.match(intl_pattern, telephone_no)
         )
         if passed_Validation:
             Error_Message = "Telephone number is valid."
@@ -471,6 +673,51 @@ class InputTelephoneNo(InputText):
         print(self._name,": ", passed_Validation, "Message: ", Error_Message)
 
         return passed_Validation, Error_Message
+
+
+class InputDropdown(ctk.CTkOptionMenu):
+    def __init__(
+            self, 
+            parent,
+            options: list[str],
+            ) -> None:
+        super().__init__(
+            parent,
+            values=options,
+            font=text__font,
+            corner_radius=5,
+            fg_color="white",
+            button_color="white",
+            button_hover_color=colour_BlueTint3,
+            text_color="black",
+            dropdown_fg_color="white",
+            dropdown_text_color="black",
+            dropdown_hover_color=colour_BlueTint3,
+            bg_color="transparent",
+            )
+        
+        
+        side = "top"
+        fill = "x"
+        expand = False
+        padding_verticle = (5,0)
+        padding_horizontal = (5,5)
+        
+        self.pack(side=side, expand = expand, fill = fill, padx=padding_horizontal, pady=padding_verticle)
+
+    def get_value(self) -> str:
+        """
+        Retrieves the currently selected value from the dropdown.
+
+        Returns:
+            str: The currently selected value in the dropdown.
+        """
+        print(self._name,": ", self.get())
+        return self.get()
+    
+    def clear_input(self):
+        self.set("")
+    
 
 if __name__ == "__main__":
     app =  AppWindow()
