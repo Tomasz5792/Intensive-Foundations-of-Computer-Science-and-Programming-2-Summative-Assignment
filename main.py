@@ -106,8 +106,9 @@ class  AppWindow(ctk.CTk):
         self.Label_Directorate = AppLabel(self.menu, text="Directorate:")
         self.dropdown_Directorate = InputDropdown(self.menu, options=directorates)
 
-        self.add_item_button =  AppButton(self.menu, text="Clear Inputs", command=self.clear_input)
         self.add_item_button =  AppButton(self.menu, text="Add New Item", command=self.on_add_item)
+        self.add_item_button =  AppButton(self.menu, text="Clear Inputs", command=self.clear_input)
+        
 
     def on_add_item(self):
         """
@@ -355,8 +356,8 @@ class  AppTable(ctk.CTkFrame):
         width_table = self.tree.winfo_width() #I would like this to change when the screen size changes not just on loading the data
         print("Table width: ", width_table)
         if width_table <= 1:
-            width_table = 1300-30  # default width if not yet rendered
-        column_width = (width_table -30) // len(columns)
+            width_table = 1300-10  # default width if not yet rendered
+        column_width = (width_table -10) // len(columns)
 
         for column in columns:
             self.tree.heading(column, text=column)
