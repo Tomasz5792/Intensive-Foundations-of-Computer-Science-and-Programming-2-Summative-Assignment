@@ -47,13 +47,13 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 - The appliation shall have appropriate data input such as dropdowns or text input.
 
 #### Future Functional Requirements
-- Incluse a day night mode
-- The application shall allow deleting of items.
-- Show and hide add item bar.
+ - Incluse a day night mode
+ - The application shall allow deleting of items.
+ - Show and hide add item bar.
 
 #### Future Accessibility Requirements
-- Font and text resizing
-- Colour changes for specific types of colourblind or 
+  - Font and text resizing
+  - Colour changes for specific types of colourblind or 
 
 ### Non-Functional Requirements
 
@@ -67,11 +67,11 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 
 #### Accessibility Requirements
 
-- All text and interactive elements shall maintain a minimum 4.5:1 colour contrast ratio against their background, in accordance with WCAG 2.1 AA standards.
-- All screens shall maintain consistent navigation and layout.
+ - All text and interactive elements shall maintain a minimum 4.5:1 colour contrast ratio against their background, in accordance with WCAG 2.1 AA standards.
+ - All screens shall maintain consistent navigation and layout.
 
 #### Future Non-Functional Requirements
--- I would like this to change when the screen size changes not just on loading the data
+  - I would like this to change when the screen size changes not just on loading the data
 
 
 
