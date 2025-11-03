@@ -87,19 +87,36 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 
 ## Tech Stack Outline
 
-*describe the technologies you will use*
+UI / GUI:
+- Python with Tkinter and CustomTkinter
+ - why
+
+App logic:
+- Python object orientated programming, OOP structure
+ - why
+
+Data:
+- CSV File
+ - why
+
+Data validation:
+- regular expressions (regex)
+ - why
 
 
 ## Code Design Document
-
-*Code Design Document: provide a class diagram or similar documentation to
-illustrate your code design.*
 
 The code design is summarised in the class diagram below.
 
 The `App_Window` class inherits from the `ctk.CTk` class, which provides the foundational GUI window functionality. This inheritance allows `App_Window` to use and extend the methods and attributes of `ctk.CTk` to create a customised application window with specific features.  All the other classes are placed inside this class.
 
 The `Frame` and `Table` class inherits from the `ctk.CTkFrame` class, which provides foundational responsive component functionality. This inheritance allows `Frame` and `Table` to be placed inside themselves in order to create a reponsive app. `Frame` is extended with flaxible layout and colour option and `Table` is extended with an interactive tkinter table.
+
+`InputText` extends `ctk.CTkEntry` by adding reusable methods for retrieving and clearing user input.
+`InputName` further extends `InputText` with name-specific validation logic, for example capitalisation and no numbers.
+`InputTelephoneNo` also extends `InputText`, adding validation rules for UK telephone formats.
+
+Together these classes provide a modular and maintainable aproach to handling user input and data validation.
 
 ![class-diagram](InheritanceDiagram2.png)
 
@@ -109,6 +126,8 @@ The `Frame` and `Table` class inherits from the `ctk.CTkFrame` class, which prov
 *Write a coherent strategy for testing your application. Explain what types of testing
 you will use to test your MVP. Note that the second summative assignment requires
 writing some unit tests using a Python framework. (500 words +/- 10%)*
+
+
 
 
 ### References
