@@ -18,11 +18,17 @@ Welcome to the Add item to table app Application repository! This Tkinter-based 
 # Introduction
 
 I work at DEFRA, the Department for the Environment, Food and Rural Affairs.  DEFRA is a large government department responsible for safeguarding the natural environment, supporting farming and protecting the countryside.  Within DEFRA I work in a small business support team where my role is to use Microsoft power platform tools such as PowerApps, Power BI and Power Automate to improve the efficiency of the teams we support.  One of our teams’ tasks is to find people to be seconded when needed, the problem is that the data is scattered across multiple locations and is inconsistent, the “Add Item to Table App” is designed to solve this problem.
+
 DEFRA’s corporate structure is sprawling, massive and ever changing, it is split into Director General areas, then directorates, then teams.  The organisation is a massive bureaucracy with a heavy emphasis on compliance making it unwieldy and inefficient.  To counter this the Digital Data and Technology Service, DDTS, are pushing a strategy to promote automation, innovation and data integrity.  Currently a lot of processes rely on data in an Excel file on someone’s desktop or data within an external companies database which we aren’t allowed to access.
+
 Our team need to find people with certain skills, location and other variables to be seconded into emergency roles, the problem is that this takes a lot of time and is inefficient.  The data is spread around in different places, in some places the data is duplicated or inconsistent.  This whole process is much more time consuming than it needs to be due to the difficulty finding the data along with the time lost verifying it is correct.  Overall, this is not just a technical issue but also requires people to change how they work.
+
 The proposed solution is a Python- based graphical user interface (GUI) application developed using Tkinter and CustomTkinter.  The application will serve as a centralised platform for data entry and data management, enabling users to input the required information easily and efficiently.  The application will also involve integrated data validation such as pattern checking using regular expressions for formatting names or phone numbers.  Input validation ensures standardised entries such as capitalised names or phone numbers in the correct formats.  This approach supports data integrity while providing an intuitive interface that enhances user experience while minimising input errors.  Attention will also be placed making the application accessible, for example, using a 4.5:1 contrast.
+
 The data validation improves data integrity and saves time that would be spent correcting the data.  It also aligns with DEFRAS data governance and accessibility standards along with DDTS’s strategy to promote automation and data integrity.  There is also potential to integrate the app with other department systems such as Power Automate or Power BI.
+
 On reflection it is important to involve the future users of the application when creating it as early as possible to make sure you are making something they want.  It is also a good idea to keep the code modular as to limit the amount of rework when something is changed.
+
 In conclusion this project demonstrates innovation and aligns with DEFRA’s strategies.  
 
 
