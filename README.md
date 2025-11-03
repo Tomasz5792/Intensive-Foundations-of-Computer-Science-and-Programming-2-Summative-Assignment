@@ -71,7 +71,7 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 - All screens shall maintain consistent navigation and layout.
 
 #### Future Non-Functional Requirements
-- I would like this to change when the screen size changes not just on loading the data
+-- I would like this to change when the screen size changes not just on loading the data
 
 
 
