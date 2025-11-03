@@ -3,7 +3,8 @@ from tkinter import ttk
 import customtkinter as ctk
 import csv
 import re
-from CTkMessagebox import CTkMessagebox  
+from CTkMessagebox import CTkMessagebox
+import tkinter.messagebox as messagebox
 
 
 
@@ -107,7 +108,7 @@ class  AppWindow(ctk.CTk):
                 icon="info"
             )
         
-        if not bool_TelephoneNo_Validation #or not bool_TelephoneNo_Validation:  # add other validations here
+        if not bool_TelephoneNo_Validation: #or not bool_TelephoneNo_Validation:  # add other validations here
             self.show_messagebox(
                 title="title",
                 message=str_TelephoneNo_Error,
@@ -134,11 +135,18 @@ class  AppWindow(ctk.CTk):
         Returns:
             None
         """
-        CTkMessagebox(
-            title=title,
-            message=message,
-            icon=icon
-        ).show()
+        # CTkMessagebox(
+        #     title=title,
+        #     message=message,
+        #     icon=icon
+        # ).show()
+
+        if icon == "warning":
+            messagebox.showwarning(title, message)
+        elif icon == "error":
+            messagebox.showerror(title, message)
+        else:
+            messagebox.showinfo(title, message)
 
 
 class  AppContainer(ctk.CTkFrame):
