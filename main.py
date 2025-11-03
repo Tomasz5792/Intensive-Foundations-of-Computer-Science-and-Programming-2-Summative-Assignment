@@ -352,11 +352,11 @@ class  AppTable(ctk.CTkFrame):
 
         self.tree["columns"] = columns
         
-        width_table = self.tree.winfo_width()
+        width_table = self.tree.winfo_width() #I would like this to change when the screen size changes not just on loading the data
         print("Table width: ", width_table)
         if width_table <= 1:
-            width_table = 1300  # default width if not yet rendered
-        column_width = width_table // len(columns)
+            width_table = 1300-30  # default width if not yet rendered
+        column_width = (width_table -30) // len(columns)
 
         for column in columns:
             self.tree.heading(column, text=column)
@@ -395,6 +395,7 @@ class AppButton(ctk.CTkButton):
             parent,
             text: str,
             command = None,
+            side: str = "bottom",
             ) -> None:
         """
         Initializes the AppButton with consistent styling.
@@ -416,10 +417,10 @@ class AppButton(ctk.CTkButton):
             #fg_color_disabled=colour_GreyTint1, #doesn't apear to be a real input
             )
         
-        side = "top"
+        #side = "top"
         fill = "x"
         expand = False
-        padding_verticle = (10,0)
+        padding_verticle = (0,10)
         padding_horizontal = (5,5)
         
         self.pack(side=side, expand = expand, fill = fill, padx=padding_horizontal, pady=padding_verticle)

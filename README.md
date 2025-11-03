@@ -70,7 +70,8 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 - All text and interactive elements shall maintain a minimum 4.5:1 colour contrast ratio against their background, in accordance with WCAG 2.1 AA standards.
 - All screens shall maintain consistent navigation and layout.
 
-
+#### Future Non-Functional Requirements
+- I would like this to change when the screen size changes not just on loading the data
 
 
 
