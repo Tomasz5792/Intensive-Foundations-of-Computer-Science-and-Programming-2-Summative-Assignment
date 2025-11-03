@@ -42,6 +42,7 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 
 ![mockups](Formative_Figma_Diagram.png)
 
+![App](PictureOfAddItemApp.png)
 
 ## Requirements Document
 
@@ -100,7 +101,7 @@ The `App_Window` class inherits from the `ctk.CTk` class, which provides the fou
 
 The `Frame` and `Table` class inherits from the `ctk.CTkFrame` class, which provides foundational responsive component functionality. This inheritance allows `Frame` and `Table` to be placed inside themselves in order to create a reponsive app. `Frame` is extended with flaxible layout and colour option and `Table` is extended with an interactive tkinter table.
 
-![class-diagram](Formative_inheritance_diagram.png)
+![class-diagram](InheritanceDiagram2.png)
 
 
 # Testing Strategy
