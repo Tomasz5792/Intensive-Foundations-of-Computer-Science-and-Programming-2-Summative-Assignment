@@ -35,34 +35,28 @@ In conclusion this project demonstrates innovation and aligns with DEFRA’s str
 ###  Empathy map
 
 #### Says
-We are wasting time looking for data.
-
-The date isn't correct or consistent.
+- We are wasting time looking for data.
+- The date isn't correct or consistent.
 
 #### Thinks
-If all the data were in one place and correct, it would save time.
-
-Will everyone want to use a new system?
+- If all the data were in one place and correct, it would save time.
+- Will everyone want to use a new system?
 
 #### Does
-Spends time searching in different places for information.
-
-Double-checks information for accuracy.
+- Spends time searching in different places for information.
+- Double-checks information for accuracy.
 
 #### Feels
-Frustrated at the inefficiency of this and the duplication of effort.
-
-Anxious about data accuracy.
+- Frustrated at the inefficiency of this and the duplication of effort.
+- Anxious about data accuracy.
 
 #### Pain
-Frustrations:  Scattered and inconsistent data.
-
-Obstacles:  Resistance to change.
+- Frustrations:  Scattered and inconsistent data.
+- Obstacles:  Resistance to change.
 
 #### Gain
-Goal:  To create a centralised platform.
-
-Desired Outcome:  Improved accuracy and efficiency.
+- Goal:  To create a centralised platform.
+- Desired Outcome:  Improved accuracy and efficiency.
 
 
 # Design
