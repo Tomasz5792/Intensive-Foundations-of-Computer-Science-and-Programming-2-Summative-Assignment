@@ -87,19 +87,17 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 
 UI / GUI:
 - Python with Tkinter and CustomTkinter
- - why
+  - [customtkinter documentation](https://customtkinter.tomschimansky.com/documentation/appearancemode)  
+  - [Adding a table](https://github.com/TomSchimansky/CustomTkinter/discussions/431)
 
 App logic:
 - Python object orientated programming, OOP structure
-  - why
 
 Data:
 - CSV File
-  - why
 
 Data validation:
 - regular expressions (regex)
-  - why
 
 
 ## Code Design Document
@@ -121,13 +119,13 @@ Together these classes provide a modular and maintainable aproach to handling us
 
 # Testing Strategy
 
-*Write a coherent strategy for testing your application. Explain what types of testing
-you will use to test your MVP. Note that the second summative assignment requires
-writing some unit tests using a Python framework. (500 words +/- 10%)*
+This testing strategy will aim to produce a piece of software which is usable, reliable with few bugs and is easy to use.
 
+This testing will be continuous throughout the development of the software.  When I finish a piece of code, I will test to see if it works as intended.
 
+The testing will be split into two different areas, functional testing which makes sure the software does what it is supposed to, for example checks the phone number or adds a person to the csv file, and non-functional testing which is how the software preforms, how secure and how usable it is, for example if colour blind people can see the text in the app and if the app is responsive when resized.
 
+I will employ a combination of manual testing and automated testing, the automated testing I shall do with the unit test framework.  I shall manually test both functional and non-functional requirements as I develop, making sure that when I add a component frame, it resizes correctly, or when I add a button, it’s the correct colour and fits the space properly.  I will also manually test that the software recognises inputs are in the correct layout, for example, British telephone numbers.  I can’t possibly test that many, though, so I will also use the unit test framework to automate the checking of 20 correct and 20 incorrect inputs. Then, if the tests fail, I will update the code so that all the tests pass, removing a bug.
 
-### References
-[customtkinter documentation](https://customtkinter.tomschimansky.com/documentation/appearancemode)  
-[Adding a table](https://github.com/TomSchimansky/CustomTkinter/discussions/431)
+I will use the linting and code quality checks present in Visual Studio Code.  Also, due to the nature of this project, I shall do the user acceptance testing, as there are no users, comparing the app to the planned functional and non-functional requirements.
+In conclusion, I will manually test, comparing the app to the requirements, then use unit tests to check the input validation. 
