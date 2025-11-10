@@ -42,8 +42,6 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 
 ![mockups](Formative_Figma_Diagram.png)
 
-![App](PictureOfAddItemApp.png)
-
 ## Requirements Document
 
 ### Functional Requirements
@@ -93,15 +91,15 @@ UI / GUI:
 
 App logic:
 - Python object orientated programming, OOP structure
- - why
+  - why
 
 Data:
 - CSV File
- - why
+  - why
 
 Data validation:
 - regular expressions (regex)
- - why
+  - why
 
 
 ## Code Design Document
