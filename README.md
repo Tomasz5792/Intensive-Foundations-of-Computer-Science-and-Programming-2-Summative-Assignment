@@ -86,9 +86,9 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
  - The application shall allow deleting of items.
  - Show and hide add item bar.
 
-#### Future Accessibility Requirements
+#### Future Accessibility Functional Requirements
   - Font and text resizing
-  - Colour changes for specific types of colourblind or 
+  - Colour changes for specific types of colourblind or for people who have epilepsy.
 
 ### Non-Functional Requirements
 
