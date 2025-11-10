@@ -82,12 +82,12 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
 - The appliation shall have appropriate data input such as dropdowns or text input.
 
 #### Future Functional Requirements
- - Incluse a day night mode
+ - Incluse a day night mode.
  - The application shall allow deleting of items.
  - Show and hide add item bar.
 
 #### Future Accessibility Functional Requirements
-  - Font and text resizing
+  - Font and text resizing.
   - Colour changes for specific types of colourblind or for people who have epilepsy.
 
 ### Non-Functional Requirements
@@ -106,25 +106,25 @@ The app was prototyped using [Figma](https://www.figma.com/design/PMYPoYa4koSNLf
  - All screens shall maintain consistent navigation and layout.
 
 #### Future Non-Functional Requirements
-  - I would like this to change when the screen size changes not just on loading the data
+  - I would like this to change when the screen size changes not just on loading the data.
 
 
 
 ## Tech Stack Outline
 
 UI / GUI:
-- Python with Tkinter and CustomTkinter
+- Python with Tkinter and CustomTkinter.
   - [customtkinter documentation](https://customtkinter.tomschimansky.com/documentation/appearancemode)  
   - [Adding a table](https://github.com/TomSchimansky/CustomTkinter/discussions/431)
 
 App logic:
-- Python object orientated programming, OOP structure
+- Python object orientated programming, OOP structure.
 
 Data:
-- CSV File
+- CSV File.
 
 Data validation:
-- regular expressions (regex)
+- regular expressions (regex).
 
 
 ## Code Design Document
