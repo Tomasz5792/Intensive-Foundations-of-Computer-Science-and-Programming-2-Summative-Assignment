@@ -5,7 +5,7 @@ from main import AppWindow, InputTelephoneNo, InputName
 
 
 
-
+@unittest.skipIf(RUNNING_IN_GITHUB, "Skipping GUI tests on GitHub Actions (no display available)") #skips tests when running in github actions
 class TestSmoke(unittest.TestCase):
     def test_create_app(self):
         """Tries to create app window."""
@@ -37,6 +37,7 @@ class TestSmoke(unittest.TestCase):
         except FileNotFoundError as e:
             self.fail(f"test_csv_exists failed, error: {e}")
             
+@unittest.skipIf(RUNNING_IN_GITHUB, "Skipping GUI tests on GitHub Actions (no display available)") #skips tests when running in github actions
 class CheckDataValidation(unittest.TestCase):
     def test_phone_number_validation(self):
         """Checks if phone number validation is working correctly."""
