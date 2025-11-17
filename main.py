@@ -72,7 +72,7 @@ class  AppWindow(ctk.CTk):
         # settings
         self.title("Add item to table app")
         self.geometry("1200x600")
-        self.minsize(900, 500)
+        self.minsize(900, 500)  #900x500 minimum size
 
         # components
         self.header =  AppContainer(self, side = "top", colour_background = colour_main, height = 45)
@@ -86,7 +86,8 @@ class  AppWindow(ctk.CTk):
 
         self.body =  AppContainer(self, side = "bottom")
 
-        self.menu =  AppContainer(self.body, side = "right", colour_background = colour_menu, width = 300, corner_radius = 5, padding_verticle = 5, padding_horizontal = (0,5))
+        #input tab
+        self.menu =  AppContainer(self.body, side = "right", colour_background = colour_menu, width = 300, corner_radius = 5, padding_verticle = 5, padding_horizontal = (0,5))  
         
         self.table_container =  AppContainer(self.body, side = "left", padding_verticle = 5, padding_horizontal = 5)
         self.table =  AppTable(self.table_container)
@@ -245,8 +246,8 @@ class  AppContainer(ctk.CTkFrame):
             colour_background: str = "transparent",
             width: int | None = None,
             height: int | None = None,
-            #fill: str = "both",
-            #expand: bool = True,
+            #fill: str = "both",  #set in class now
+            #expand: bool = True,  #set in class now
             corner_radius: int = 0,
             padding_verticle: tuple[int, int] = (0,0),
             padding_horizontal: tuple[int, int] = (0,0),
@@ -272,8 +273,8 @@ class  AppContainer(ctk.CTkFrame):
         fill = "both"
         expand = True
 
-        # fixed size
-        # if width is not None or height is not None:
+        
+        # if width is not None or height is not None:  #fixed size
         #     expand = False
         #     self.pack_propagate(False)
         #     if width is not None:
@@ -354,7 +355,7 @@ class  AppTable(ctk.CTkFrame):
         self.tree["columns"] = columns
         
         width_table = self.tree.winfo_width() #I would like this to change when the screen size changes not just on loading the data
-        print("Table width: ", width_table)
+        #print("Table width: ", width_table)  #testing only
         if width_table <= 1:
             width_table = 1300-10  # default width if not yet rendered
         column_width = (width_table -10) // len(columns)
