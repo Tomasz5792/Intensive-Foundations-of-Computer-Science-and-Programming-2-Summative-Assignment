@@ -1,5 +1,10 @@
+import os  #for ignoring github actions for gui tests
 import unittest
+RUNNING_IN_GITHUB = os.environ.get("GITHUB_ACTIONS") == "true"  #stops running gui tests in github actions as they dont work
 from main import AppWindow, InputTelephoneNo, InputName
+
+
+
 
 class TestSmoke(unittest.TestCase):
     def test_create_app(self):
